@@ -15,7 +15,7 @@ pipeline {
       steps {
       echo "Start tests!"
       echo "Testing..."
-      script {
+      withGradle {
       if (isUnix()) {
                       sh 'gradle clean doTest'
                       } else {
