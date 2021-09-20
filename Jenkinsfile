@@ -2,13 +2,13 @@ def agentImage = 'gradle:6.8.3-jdk11'
 
 pipeline {
 
+ agent {docker {image '${agentImage}'}}
+
   options {
     buildDiscarder(logRotator(numToKeepStr: '20'))
     timestamps()
     disableConcurrentBuilds()
   }
-
-agent {docker {image "${agentImage}"}}
 
   stages {
     stage('Run tests') {
