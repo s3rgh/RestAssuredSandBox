@@ -15,12 +15,12 @@ pipeline {
       steps {
       echo "Start tests!"
       echo "Testing..."
-        script {
+      sh 'gradle clean test'
+//        script {
 //           docker.image("${agentImage}").inside() {
 //             sh 'gradle clean test --no-daemon'
 //           }
-            sh 'gradle clean test --no-daemon'
-        }
+//        }
         echo "End of stage test!"
       }
       post {
