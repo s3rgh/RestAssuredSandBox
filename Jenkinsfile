@@ -15,21 +15,17 @@ pipeline {
       steps {
       echo "Start tests!"
       echo "Testing..."
-      withGradle {
-      if (isUnix()) {
-                      sh 'gradle clean doTest'
-                      } else {
-                        bat 'gradle clean doTest'
-                      }
-                 }
+      bat 'gradle clean doTest'
 
 //        script {
 //           docker.image("${agentImage}").inside() {
 //             sh 'gradle clean test --no-daemon'
 //           }
 //        }
-        echo "End of stage test!"
+
+      echo "End of stage test!"
       }
+
       post {
         always {
           script {
