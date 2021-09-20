@@ -8,16 +8,19 @@ pipeline {
     disableConcurrentBuilds()
   }
 
-agent any
+agent {docker {image "${agentImage}"}}
 
   stages {
     stage('Run tests') {
       steps {
+      echo "Start tests!"
+      echo "Testing..."
         script {
           docker.image("${agentImage}").inside() {
             sh 'gradle clean test --no-daemon'
           }
         }
+        echo "End of stage test!"
       }
       post {
         always {
