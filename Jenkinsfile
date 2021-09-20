@@ -17,9 +17,9 @@ pipeline {
       echo "Testing..."
       script {
       if (isUnix()) {
-                      sh 'gradle clean test'
+                      sh 'gradle clean doTest'
                       } else {
-                        bat 'gradle clean test'
+                        bat 'gradle clean doTest'
                       }
                  }
 

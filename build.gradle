@@ -57,6 +57,13 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+task doTest(type: Test) {
+    retry {
+        maxRetries = 3
+        useJUnitPlatform()
+        }
+    }
+
 test {
     useJUnitPlatform()
 }

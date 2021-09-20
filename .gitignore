@@ -1,9 +1,8 @@
 .allure
 .gradle
+.idea/*
 .idea
 allure-results/*
 build/*
 out/*
 /testLog.log
-/.idea/*
-/.idea/
