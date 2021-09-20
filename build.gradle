@@ -54,7 +54,7 @@ tasks.withType(JavaCompile) {
 
 task doTest(type: Test) {
     retry {
-        maxRetries = 3
+        maxRetries = 1
         useJUnitPlatform()
     }
 }
