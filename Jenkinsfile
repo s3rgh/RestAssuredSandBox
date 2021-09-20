@@ -1,8 +1,8 @@
-//def agentImage = 'gradle:6.8.3-jdk11'
+def agentImage = 'gradle:6.8.3-jdk11'
 
 pipeline {
 
- agent {docker {image 'gradle:6.8.3-jdk11'}}
+ agent {docker {image "${agentImage}"}}
 
   options {
     buildDiscarder(logRotator(numToKeepStr: '20'))
