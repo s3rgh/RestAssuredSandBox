@@ -1,8 +1,8 @@
-def agentImage = 'gradle:6.8.3-jdk11'
+//def agentImage = 'gradle:6.8.3-jdk11'
 
 pipeline {
 
- agent {docker {image "${agentImage}"}}
+ agent any // {docker {image "${agentImage}"}}
 
   options {
     buildDiscarder(logRotator(numToKeepStr: '20'))
@@ -15,19 +15,19 @@ pipeline {
       steps {
       echo "Start tests!"
       echo "Testing..."
-//       script {
-//       if (isUnix()) {
-//                       sh 'gradle clean test'
-//                       } else {
-//                         bat 'gradle clean test'
-//                       }
-//                  }
+      script {
+      if (isUnix()) {
+                      sh 'gradle clean test'
+                      } else {
+                        bat 'gradle clean test'
+                      }
+                 }
 
-       script {
-          docker.image("${agentImage}").inside() {
-            sh 'gradle clean test --no-daemon'
-          }
-       }
+//        script {
+//           docker.image("${agentImage}").inside() {
+//             sh 'gradle clean test --no-daemon'
+//           }
+//        }
         echo "End of stage test!"
       }
       post {
