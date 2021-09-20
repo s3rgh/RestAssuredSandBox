@@ -8,6 +8,8 @@ pipeline {
     disableConcurrentBuilds()
   }
 
+agent any
+
   stages {
     stage('Run tests') {
       steps {

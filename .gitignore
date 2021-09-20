@@ -5,4 +5,4 @@ allure-results/*
 build/*
 out/*
 /testLog.log
-/.idea/
+/.idea/*
