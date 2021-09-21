@@ -3,12 +3,6 @@ def emailTo = params.toEmails
 
  pipeline {
 
-   options {
-     buildDiscarder(logRotator(numToKeepStr: '20'))
-     timestamps()
-     disableConcurrentBuilds()
-   }
-
    agent any
 
    stages {
@@ -41,13 +35,11 @@ def emailTo = params.toEmails
          }
        }
      }
-   }
    post {
      cleanup {
        script {
          cleanWs()
-       }
-     }
-   }
- }
-
+      }
+    }
+  }
+}
