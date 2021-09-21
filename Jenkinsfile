@@ -1,8 +1,14 @@
 //def agentImage = 'gradle:6.8.3-jdk11'
+def emailTo = params.toEmails
 
 pipeline {
 
  agent any // {docker {image "${agentImage}"}}
+
+   environment {
+     STAGE = "$environments"
+     TAG_EXPRESSIONS = "$tagExpression"
+   }
 
   options {
     buildDiscarder(logRotator(numToKeepStr: '20'))
@@ -31,6 +37,25 @@ pipeline {
           script {
             allure report: 'allure_reports', results: [[path: 'build/allure-results']]
           }
+
+        post('Email') {
+           steps{
+                 script {
+                         cest = TimeZone.getTimeZone("CEST")
+                         def cest = new Date()
+                         println(cest)
+                         def jobName = currentBuild.fullDisplayName
+                         env.Name = Name
+                         env.cest = cest
+                         emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
+                         mimeType: 'text/html',
+                         subject: "[Jenkins] Test Execution Summary",
+                         to: "${emailTo}",
+                         replyTo: "${emailTo}"
+
+                         }
+                 }
+           }
         }
       }
     }
