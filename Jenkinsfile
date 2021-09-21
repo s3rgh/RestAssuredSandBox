@@ -31,12 +31,6 @@ pipeline {
         always {
           script {
             allure report: 'allure_reports', results: [[path: 'build/allure-results']]
-            cest = TimeZone.getTimeZone("CEST")
-            def cest = new Date()
-            println(cest)
-            def jobName = currentBuild.fullDisplayName
-            env.Name = Name
-            env.cest = cest
             emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
                     mimeType: 'text/html',
                     subject: "[Jenkins] Test Execution Summary",
