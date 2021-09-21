@@ -35,6 +35,7 @@ def emailTo = params.toEmails
          }
        }
      }
+   }
    post {
      cleanup {
        script {
@@ -42,4 +43,3 @@ def emailTo = params.toEmails
       }
     }
   }
-}
