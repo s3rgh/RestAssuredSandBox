@@ -38,12 +38,7 @@ pipeline {
                     replyTo: "${emailTo}"
           }
           script {
-                      allure report: 'allure_reports', results: [[path: 'build/allure-results']]
-                      emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
-                              mimeType: 'text/html',
-                              subject: "[Jenkins] Test Execution Summary",
-                              to: "${emailTo}",
-                              replyTo: "${emailTo}"
+                      java "-DprojectName=RestAssuredSandBox" "-Denv=notifications" "-DreportLink=${BUILD_URL}" "-Dconfig.file=config.json" -jar allure-notifications-3.1.2.jar
                     }
         }
       }
