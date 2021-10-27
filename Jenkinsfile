@@ -41,6 +41,7 @@ pipeline {
             def chats = params.chats.readLines()
             chats.each { String chatID ->
             telegramSend(message: "Pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${env.BUILD_URL}", chatId: chatID)
+            }
           }
         }
       }
