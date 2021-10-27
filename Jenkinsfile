@@ -37,6 +37,14 @@ pipeline {
                     to: "${emailTo}",
                     replyTo: "${emailTo}"
           }
+          script {
+                      allure report: 'allure_reports', results: [[path: 'build/allure-results']]
+                      emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
+                              mimeType: 'text/html',
+                              subject: "[Jenkins] Test Execution Summary",
+                              to: "${emailTo}",
+                              replyTo: "${emailTo}"
+                    }
         }
       }
     }

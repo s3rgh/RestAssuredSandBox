@@ -1,0 +1,1 @@
+java "-DprojectName=RestAssuredSandBox" "-Denv=notifications" "-DreportLink=${BUILD_URL}" "-Dconfig.file=config.json" -jar allure-notifications-3.1.2.jar
