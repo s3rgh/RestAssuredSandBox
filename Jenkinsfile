@@ -38,13 +38,10 @@ pipeline {
                     subject: "[Jenkins] Test Execution Summary",
                     to: "${emailTo}",
                     replyTo: "${emailTo}"
+            def chats = params.chats.readLines()
+            chats.each { String chatID ->
+            telegramSend(message: "Pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${env.BUILD_URL}", chatId: chatID)
           }
-          script {
-                      // Send Notification for list of telegram chats provided as multi-line string parameter on Jenkins
-                                  def chats = params.chats.readLines()
-                                  chats.each { String chatID ->
-                                  telegramSend(message: "Pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${env.BUILD_URL}", chatId: chatID)
-                    }
         }
       }
     }
