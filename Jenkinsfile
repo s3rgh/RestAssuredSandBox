@@ -38,7 +38,7 @@ pipeline {
                     replyTo: "${emailTo}"
           }
           script {
-                      bat "java -DprojectName=RestAssuredSandBox -Denv=notifications -DreportLink=${BUILD_URL} -Dconfig.file=config.json -jar allure-notifications-3.1.2.jar"
+                      bat "java -DprojectName=RestAssuredSandBox -Denv=notifications -DreportLink=${http://localhost:8081/job/email} -Dconfig.file=config.json -Dcomm=Build_results -jar allure-notifications-3.1.2.jar"
                     }
         }
       }
