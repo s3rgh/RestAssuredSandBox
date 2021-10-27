@@ -8,7 +8,7 @@
     "base": {
       "lang": "en",
       "messenger": "telegram",
-      "allureFolder": "build/allure-report/",
+      "allureFolder": "D:/Jenkins.jenkins/workspace/email/allure_reports",
       "allureLinkPath": "allure",
       "chart": true,
       "chartName": "",
