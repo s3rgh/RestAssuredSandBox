@@ -1,4 +1,6 @@
 //def agentImage = 'gradle:6.8.3-jdk11'
+properties([parameters([text(description: 'Specify telegram Chat IDs for notifications about this build: i.e. -612069995', name: 'chats')])])
+
 def emailTo = params.targetEmail
 
 pipeline {
@@ -16,7 +18,7 @@ pipeline {
       steps {
       echo "Start tests!"
       echo "Testing..."
-      bat 'gradle clean doTest'
+      bat 'gradle clean doTest --no-daemon'
 
 //        script {
 //           docker.image("${agentImage}").inside() {
@@ -38,7 +40,10 @@ pipeline {
                     replyTo: "${emailTo}"
           }
           script {
-                      bat """java -DprojectName=RestAssuredSandBox -Denv=notifications -DreportLink=${BUILD_URL} -Dconfig.file=config.json -Dcomm=Build_results -jar allure-notifications-3.1.2.jar"""
+                      // Send Notification for list of telegram chats provided as multi-line string parameter on Jenkins
+                                  def chats = params.chats.readLines()
+                                  chats.each { String chatID ->
+                                  telegramSend(message: "Pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${env.BUILD_URL}", chatId: chatID)
                     }
         }
       }
