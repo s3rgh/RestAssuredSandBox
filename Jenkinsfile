@@ -33,14 +33,14 @@ pipeline {
         always {
           script {
             allure report: 'allure_reports', results: [[path: 'build/allure-results']]
-            emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
-                    mimeType: 'text/html',
-                    subject: "[Jenkins] Test Execution Summary",
-                    to: "${emailTo}",
-                    replyTo: "${emailTo}"
+//             emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
+//                     mimeType: 'text/html',
+//                     subject: "[Jenkins] Test Execution Summary",
+//                     to: "${emailTo}",
+//                     replyTo: "${emailTo}"
             def chats = params.chats.readLines()
             chats.each { String chatID ->
-            telegramSend(message: "Pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${env.BUILD_URL}", chatId: chatID)
+            telegramSend(message: "Pipeline ${JOB_NAME} ${BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${BUILD_URL}", chatId: chatID)
             }
           }
         }
