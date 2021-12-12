@@ -12,7 +12,8 @@ import static io.restassured.RestAssured.*;
 
 public class FootballGameApiConfig implements FootballGameApiEndpoints {
 
-    public static RequestSpecification requestSpecificationFootball;
+    public static RequestSpecification requestSpecificationFootballJson;
+    public static RequestSpecification requestSpecificationFootballXml;
     public static ResponseSpecification responseSpecificationFootball;
 
     static {
@@ -22,12 +23,22 @@ public class FootballGameApiConfig implements FootballGameApiEndpoints {
 
     @BeforeAll
     public static void setup() {
-        requestSpecificationFootball = new RequestSpecBuilder()
+        requestSpecificationFootballJson = new RequestSpecBuilder()
                 .setBaseUri(baseURI)
                 .setBasePath(basePath)
                 .addHeader("X-Auth-Token", "65da8355c037414ca180397447aadc52")
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .build();
+
+        requestSpecificationFootballXml = new RequestSpecBuilder()
+                .setBaseUri(baseURI)
+                .setBasePath(basePath)
+                .addHeader("X-Auth-Token", "65da8355c037414ca180397447aadc52")
+                .addHeader("Content-Type", "application/xml")
+                .addHeader("Accept", "application/xml")
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
                 .build();

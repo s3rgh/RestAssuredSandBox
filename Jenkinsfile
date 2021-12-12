@@ -1,11 +1,10 @@
-//def agentImage = 'gradle:6.8.3-jdk11'
 properties([parameters([text(description: 'Specify telegram Chat IDs for notifications about this build: i.e. -612069995', name: 'chats')])])
 
 def emailTo = params.targetEmail
 
 pipeline {
 
- agent any // {docker {image "${agentImage}"}}
+ agent any
 
   options {
     buildDiscarder(logRotator(numToKeepStr: '20'))
@@ -20,12 +19,6 @@ pipeline {
       echo "Testing..."
       bat 'gradle clean doTest --no-daemon'
 
-//        script {
-//           docker.image("${agentImage}").inside() {
-//             sh 'gradle clean test --no-daemon'
-//           }
-//        }
-
       echo "End of stage test!"
       }
 
@@ -33,11 +26,7 @@ pipeline {
         always {
           script {
             allure report: 'allure_reports', results: [[path: 'build/allure-results']]
-//             emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
-//                     mimeType: 'text/html',
-//                     subject: "[Jenkins] Test Execution Summary",
-//                     to: "${emailTo}",
-//                     replyTo: "${emailTo}"
+
             def chats = params.chats.readLines()
             chats.each { String chatID ->
             telegramSend(message: "Pipeline ${JOB_NAME} ${BUILD_NUMBER} - ${currentBuild.currentResult}, please check ${BUILD_URL}", chatId: chatID)

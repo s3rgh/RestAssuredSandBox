@@ -7,4 +7,3 @@ build/*
 out/*
 /testLog.log
 /piechart.png
-/.idea/

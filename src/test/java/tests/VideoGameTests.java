@@ -17,7 +17,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void getAllGames() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .when()
                 .get(ALL_VIDEO_GAMES)
                 .then()
@@ -27,7 +27,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void thirdTestWithEndpoints() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .pathParam("videoGameId", 1)
                 .response()
                 .spec(responseSpecificationVideoGame)
@@ -51,7 +51,7 @@ public class VideoGameTests extends VideoGameConfig {
                 "}";
 
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .body(json)
                 .when()
                 .post(ALL_VIDEO_GAMES)
@@ -70,7 +70,7 @@ public class VideoGameTests extends VideoGameConfig {
                 "  </videoGame>";
 
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .body(xml)
                 .header("Content-Type", "application/xml")
                 .header("Accept", "application/xml")
@@ -83,7 +83,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void deleteGame() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .when()
                 .delete("videogames/14")
                 .then()
@@ -103,7 +103,7 @@ public class VideoGameTests extends VideoGameConfig {
                 "}";
 
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .body(json)
                 .when()
                 .put("videogames/11")
@@ -114,7 +114,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void getGameById() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .pathParam("videoGameId", 16)
                 .when()
                 .get(VIDEO_GAME)
@@ -136,7 +136,7 @@ public class VideoGameTests extends VideoGameConfig {
                 "  </videoGame>";
 
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .body(xml)
                 .header("Content-Type", "application/xml")
                 .header("Accept", "application/xml")
@@ -159,7 +159,7 @@ public class VideoGameTests extends VideoGameConfig {
                 .setReleaseDate("1999-12-02");
 
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .body(dto)
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
@@ -172,7 +172,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void xsdSchemeValidation() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .pathParam("videoGameId", 5)
                 .header("Content-Type", "application/xml")
                 .header("Accept", "application/xml")
@@ -185,7 +185,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void jsonSchemeValidation() {
         given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .pathParam("videoGameId", 5)
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
@@ -200,7 +200,7 @@ public class VideoGameTests extends VideoGameConfig {
     @Test
     public void responseTimeCheck() {
         long timeMs = given()
-                .spec(requestSpecificationVideoGame)
+                .spec(requestSpecificationVideoGameJson)
                 .pathParam("videoGameId", 5)
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")

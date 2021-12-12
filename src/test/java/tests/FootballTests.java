@@ -17,7 +17,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getAvailableCompetitions() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .queryParam("plan", "TIER_ONE")
                 .when()
                 .get(ALL_AVAILABLE_COMPETITIONS)
@@ -28,7 +28,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getOneAvailableCompetition() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 //.queryParam("areas", 2077)
                 .pathParam("id", 2001)
                 .when()
@@ -40,7 +40,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getAllAvailableAreas() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .queryParam("areas", 2000)
                 //.pathParam("id", 2001)
                 .when()
@@ -52,7 +52,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getOneParticularArea() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .pathParam("id", 2000)
                 .when()
                 .get(LIST_ONE_PARTICULAR_AREA)
@@ -63,7 +63,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getAllTeamsForParticularCompetition() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .pathParam("id", 2013)
                 .when()
                 .get(ALL_TEAMS_FOR_A_PARTICULAR_COMPETITION)
@@ -74,7 +74,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getDateTeamFounded() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .pathParam("id", 1765)
                 .when()
                 .get(SHOW_ONE_PARTICULAR_TEAM)
@@ -86,7 +86,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getResponseBodyAllAvailableAreas() {
         given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 //.pathParam("id", 2013)
                 .when()
                 .get(LIST_ALL_AVAILABLE_AREAS)
@@ -100,7 +100,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void getData() {
         Response response = given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .when()
                 .get(ALL_AVAILABLE_COMPETITIONS)
                 .then()
@@ -116,7 +116,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void extractHeaders() {
         Response response = given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .pathParam("id", 57)
                 .when()
                 .get(SHOW_ONE_PARTICULAR_TEAM)
@@ -142,7 +142,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void extractDataFromBodyWithJsonPath() {
         Response response = given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .when()
                 .get(ALL_AVAILABLE_COMPETITIONS)
                 .then()
@@ -157,7 +157,7 @@ public class FootballTests extends FootballGameApiConfig {
     @Test
     public void extractAllTeamNames() {
         Response response = given()
-                .spec(requestSpecificationFootball)
+                .spec(requestSpecificationFootballJson)
                 .pathParam("id", 2021)
                 .when()
                 .get(ALL_TEAMS_FOR_A_PARTICULAR_COMPETITION)

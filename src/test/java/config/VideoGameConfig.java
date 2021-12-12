@@ -13,7 +13,8 @@ import static io.restassured.RestAssured.*;
 
 public class VideoGameConfig implements VideoGamesEndPoints {
 
-    public static RequestSpecification requestSpecificationVideoGame;
+    public static RequestSpecification requestSpecificationVideoGameJson;
+    public static RequestSpecification requestSpecificationVideoGameXml;
     public static ResponseSpecification responseSpecificationVideoGame;
 
     static {
@@ -24,12 +25,22 @@ public class VideoGameConfig implements VideoGamesEndPoints {
 
     @BeforeAll
     public static void setup() {
-        requestSpecificationVideoGame = new RequestSpecBuilder()
+        requestSpecificationVideoGameJson = new RequestSpecBuilder()
                 .setBaseUri(baseURI)
                 .setBasePath(basePath)
                 .setPort(port)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .build();
+
+        requestSpecificationVideoGameXml = new RequestSpecBuilder()
+                .setBaseUri(baseURI)
+                .setBasePath(basePath)
+                .setPort(port)
+                .addHeader("Content-Type", "application/xml")
+                .addHeader("Accept", "application/xml")
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
                 .build();
